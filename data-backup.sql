@@ -725,10 +725,101 @@ ALTER SEQUENCE hdb_catalog.remote_schemas_id_seq OWNED BY hdb_catalog.remote_sch
 
 
 --
+-- Name: component; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.component (
+    id integer NOT NULL,
+    name text NOT NULL,
+    image_url text NOT NULL,
+    stack_size integer DEFAULT 0 NOT NULL,
+    sink_value integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.component OWNER TO postgres;
+
+--
+-- Name: component_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.component_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.component_id_seq OWNER TO postgres;
+
+--
+-- Name: component_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.component_id_seq OWNED BY public.component.id;
+
+
+--
+-- Name: production_structure; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.production_structure (
+    id integer NOT NULL,
+    liquid_input integer DEFAULT 0 NOT NULL,
+    solid_input integer DEFAULT 0 NOT NULL,
+    liquid_output integer DEFAULT 0 NOT NULL,
+    solid_output integer DEFAULT 0 NOT NULL,
+    energy_consumption numeric DEFAULT 0 NOT NULL,
+    name text NOT NULL,
+    image_url text NOT NULL
+);
+
+
+ALTER TABLE public.production_structure OWNER TO postgres;
+
+--
+-- Name: production_tructure_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.production_tructure_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.production_tructure_id_seq OWNER TO postgres;
+
+--
+-- Name: production_tructure_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.production_tructure_id_seq OWNED BY public.production_structure.id;
+
+
+--
 -- Name: remote_schemas id; Type: DEFAULT; Schema: hdb_catalog; Owner: postgres
 --
 
 ALTER TABLE ONLY hdb_catalog.remote_schemas ALTER COLUMN id SET DEFAULT nextval('hdb_catalog.remote_schemas_id_seq'::regclass);
+
+
+--
+-- Name: component id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.component ALTER COLUMN id SET DEFAULT nextval('public.component_id_seq'::regclass);
+
+
+--
+-- Name: production_structure id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.production_structure ALTER COLUMN id SET DEFAULT nextval('public.production_tructure_id_seq'::regclass);
 
 
 --
@@ -857,6 +948,7 @@ hdb_catalog	hdb_role	permissions	array	{"manual_configuration": {"remote_table":
 --
 
 COPY hdb_catalog.hdb_schema_update_event (instance_id, occurred_at, invalidations) FROM stdin;
+85ec01a3-15ff-41a7-b9be-0f9e1f86e4f1	2020-07-13 16:57:14.645372+00	{"metadata":false,"remote_schemas":[]}
 \.
 
 
@@ -891,6 +983,8 @@ hdb_catalog	hdb_action_permission	{"custom_root_fields": {}, "custom_column_name
 hdb_catalog	hdb_action	{"custom_root_fields": {}, "custom_column_names": {}}	t	f
 hdb_catalog	hdb_action_log	{"custom_root_fields": {}, "custom_column_names": {}}	t	f
 hdb_catalog	hdb_role	{"custom_root_fields": {}, "custom_column_names": {}}	t	f
+public	component	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
+public	production_structure	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
 \.
 
 
@@ -912,10 +1006,42 @@ COPY hdb_catalog.remote_schemas (id, name, definition, comment) FROM stdin;
 
 
 --
+-- Data for Name: component; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.component (id, name, image_url, stack_size, sink_value) FROM stdin;
+1	Copper Ore	https://satisfactory.gamepedia.com/Copper_Ore#/media/File:Copper_Ore.png	100	3
+\.
+
+
+--
+-- Data for Name: production_structure; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.production_structure (id, liquid_input, solid_input, liquid_output, solid_output, energy_consumption, name, image_url) FROM stdin;
+1	0	0	0	1	0	Miner MK1	https://satisfactory.gamepedia.com/Miner#/media/File:Miner_Mk.1.png
+\.
+
+
+--
 -- Name: remote_schemas_id_seq; Type: SEQUENCE SET; Schema: hdb_catalog; Owner: postgres
 --
 
 SELECT pg_catalog.setval('hdb_catalog.remote_schemas_id_seq', 1, false);
+
+
+--
+-- Name: component_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.component_id_seq', 1, true);
+
+
+--
+-- Name: production_tructure_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.production_tructure_id_seq', 1, true);
 
 
 --
@@ -1044,6 +1170,22 @@ ALTER TABLE ONLY hdb_catalog.remote_schemas
 
 ALTER TABLE ONLY hdb_catalog.remote_schemas
     ADD CONSTRAINT remote_schemas_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: component component_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.component
+    ADD CONSTRAINT component_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: production_structure production_tructure_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.production_structure
+    ADD CONSTRAINT production_tructure_pkey PRIMARY KEY (id);
 
 
 --
