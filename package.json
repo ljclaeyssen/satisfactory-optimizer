@@ -12,7 +12,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "docker exec -i satisfactory-optimizer_postgres_1 su -  postgres -c \"pg_dump postgres\" > data-backup.sql"
+      "pre-commit": "docker exec -i satisfactory-optimizer_postgres_1 su -  postgres -c \"pg_dump postgres\" > data-backup.sql && git add data-backup.sql"
     }
   },
   "keywords": [],
