@@ -22,9 +22,9 @@ services:
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
   angular-service: # The name of the service
     container_name: angularcontainer  # Container name
-    build: ./satisfactory-optimizer # Location of our Dockerfile
+    build: ./front # Location of our Dockerfile
     volumes: # Volume binding
-      - './satisfactory-optimizer:/app' 
+      - './front:/app' 
     ports: 
       - '4200:4200' # Port mapping
 volumes:
