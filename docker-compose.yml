@@ -20,6 +20,13 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
       # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+  angular-service: # The name of the service
+    container_name: angularcontainer  # Container name
+    build: ./satisfactory-optimizer # Location of our Dockerfile
+    volumes: # Volume binding
+      - './satisfactory-optimizer:/app' 
+    ports: 
+      - '4200:4200' # Port mapping
 volumes:
   db_data:
 
