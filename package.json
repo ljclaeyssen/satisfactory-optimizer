@@ -1,0 +1,28 @@
+{
+  "name": "satisfactory-optimizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NotUltiko/satisfactory-optimizer.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "docker exec -i satisfactory-optimizer_postgres_1 su -  postgres -c \"pg_dump postgres\" > data-backup.sql"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NotUltiko/satisfactory-optimizer/issues"
+  },
+  "homepage": "https://github.com/NotUltiko/satisfactory-optimizer#readme",
+  "devDependencies": {
+    "husky": "^4.2.5"
+  }
+}
