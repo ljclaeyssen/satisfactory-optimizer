@@ -2507,13 +2507,7 @@ export type Subscription_RootRecipe_Output_By_PkArgs = {
 };
 
 export type InsertProductionStructureMutationVariables = Exact<{
-  liquid_input?: Maybe<Scalars['Int']>;
-  liquid_output?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  solid_input?: Maybe<Scalars['Int']>;
-  solid_output?: Maybe<Scalars['Int']>;
-  subcategory?: Maybe<Scalars['String']>;
-  energy_consumption?: Maybe<Scalars['numeric']>;
+  object: Production_Structure_Insert_Input;
 }>;
 
 
@@ -2522,6 +2516,17 @@ export type InsertProductionStructureMutation = (
   & { insert_production_structure_one?: Maybe<(
     { __typename?: 'production_structure' }
     & Pick<Production_Structure, 'id'>
+  )> }
+);
+
+export type GetComponentListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetComponentListQuery = (
+  { __typename?: 'query_root' }
+  & { component: Array<(
+    { __typename?: 'component' }
+    & Pick<Component, 'image_url' | 'name' | 'sink_value' | 'stack_size'>
   )> }
 );
 
@@ -2563,8 +2568,8 @@ export type GetRecipeListQuery = (
 );
 
 export const InsertProductionStructureDocument = gql`
-    mutation insertProductionStructure($liquid_input: Int, $liquid_output: Int, $name: String, $solid_input: Int, $solid_output: Int, $subcategory: String, $energy_consumption: numeric) {
-  insert_production_structure_one(object: {liquid_input: $liquid_input, liquid_output: $liquid_output, name: $name, solid_input: $solid_input, solid_output: $solid_output, subcategory: $subcategory, energy_consumption: $energy_consumption}) {
+    mutation insertProductionStructure($object: production_structure_insert_input!) {
+  insert_production_structure_one(object: $object) {
     id
   }
 }
@@ -2575,6 +2580,24 @@ export const InsertProductionStructureDocument = gql`
   })
   export class InsertProductionStructureGQL extends Apollo.Mutation<InsertProductionStructureMutation, InsertProductionStructureMutationVariables> {
     document = InsertProductionStructureDocument;
+    
+  }
+export const GetComponentListDocument = gql`
+    query getComponentList {
+  component {
+    image_url
+    name
+    sink_value
+    stack_size
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetComponentListGQL extends Apollo.Query<GetComponentListQuery, GetComponentListQueryVariables> {
+    document = GetComponentListDocument;
     
   }
 export const GetProductionListDocument = gql`

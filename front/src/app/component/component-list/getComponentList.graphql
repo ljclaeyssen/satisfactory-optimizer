@@ -1,0 +1,8 @@
+query getComponentList {
+  component {
+    image_url
+    name
+    sink_value
+    stack_size
+  }
+}

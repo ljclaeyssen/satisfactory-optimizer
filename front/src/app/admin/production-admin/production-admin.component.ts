@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {InsertProductionStructureGQL} from "../../../generated/graphql";
+import {InsertProductionStructureGQL, Production_Structure_Insert_Input} from "../../../generated/graphql";
 
 @Component({
   selector: 'app-production-admin',
@@ -10,6 +10,7 @@ import {InsertProductionStructureGQL} from "../../../generated/graphql";
 export class ProductionAdminComponent implements OnInit {
 
   public newProductionForm;
+
   constructor(private formBuilder: FormBuilder,
               private insertProductionStructureGQL: InsertProductionStructureGQL) {
     this.newProductionForm = this.formBuilder.group({
@@ -24,10 +25,10 @@ export class ProductionAdminComponent implements OnInit {
     console.log(this.newProductionForm);
   }
 
-  submitNewProduction(form) {
+  submitNewProduction(form: Production_Structure_Insert_Input) {
     console.log(form);
     console.log('TODO : Create entity on graphQL')
-    this.insertProductionStructureGQL.mutate(form).subscribe(data => {
+    this.insertProductionStructureGQL.mutate({object: form}).subscribe(data => {
       console.log(data);
     },
       error => console.error());

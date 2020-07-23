@@ -1103,6 +1103,7 @@ COPY public.production_structure (id, liquid_input, solid_input, liquid_output, 
 2	0	0	0	1	12	Miner MK2	https://satisfactory.gamepedia.com/Miner#/media/File:Miner_Mk.2.png	Miner
 1	0	0	0	1	5	Miner MK1	https://satisfactory.gamepedia.com/Miner#/media/File:Miner_Mk.1.png	Miner
 3	0	0	0	1	40	Miner MK3	https://material.angular.io/assets/img/examples/shiba2.jpg	Miner
+4	0	1	0	1	4	Constructor	https://material.angular.io/assets/img/examples/shiba2.jpg	Manufacturer
 \.
 
 
@@ -1154,7 +1155,7 @@ SELECT pg_catalog.setval('public.component_id_seq', 1, true);
 -- Name: production_tructure_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.production_tructure_id_seq', 3, true);
+SELECT pg_catalog.setval('public.production_tructure_id_seq', 4, true);
 
 
 --

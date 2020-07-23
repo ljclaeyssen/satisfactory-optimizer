@@ -13,6 +13,10 @@ export class RecipeListComponent implements OnInit {
   constructor(private getRecipeListGQL: GetRecipeListGQL) { }
 
   ngOnInit(): void {
+    this.initRecipeList();
+  }
+
+  private initRecipeList() {
     this.getRecipeListGQL.watch().valueChanges.subscribe(result => {
       this.recipeList = result.data;
       this.sortedList = result.data.recipe.slice();
