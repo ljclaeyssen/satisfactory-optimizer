@@ -22,16 +22,13 @@ export class ProductionAdminComponent implements OnInit {
       subcategory: ['', [Validators.required]],
       energy_consumption: ['', [Validators.required, Validators.min(1)]],
     });
-    console.log(this.newProductionForm);
   }
 
   submitNewProduction(form: Production_Structure_Insert_Input) {
-    console.log(form);
-    console.log('TODO : Create entity on graphQL')
     this.insertProductionStructureGQL.mutate({object: form}).subscribe(data => {
-      console.log(data);
+        this.newProductionForm.reset();
     },
-      error => console.error());
+      error => console.error);
     this.newProductionForm.reset();
   }
 

@@ -2506,6 +2506,19 @@ export type Subscription_RootRecipe_Output_By_PkArgs = {
   recipe_id: Scalars['Int'];
 };
 
+export type InsertComponentMutationVariables = Exact<{
+  object: Component_Insert_Input;
+}>;
+
+
+export type InsertComponentMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_component_one?: Maybe<(
+    { __typename?: 'component' }
+    & Pick<Component, 'id'>
+  )> }
+);
+
 export type InsertProductionStructureMutationVariables = Exact<{
   object: Production_Structure_Insert_Input;
 }>;
@@ -2567,6 +2580,21 @@ export type GetRecipeListQuery = (
   )> }
 );
 
+export const InsertComponentDocument = gql`
+    mutation insertComponent($object: component_insert_input!) {
+  insert_component_one(object: $object) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class InsertComponentGQL extends Apollo.Mutation<InsertComponentMutation, InsertComponentMutationVariables> {
+    document = InsertComponentDocument;
+    
+  }
 export const InsertProductionStructureDocument = gql`
     mutation insertProductionStructure($object: production_structure_insert_input!) {
   insert_production_structure_one(object: $object) {

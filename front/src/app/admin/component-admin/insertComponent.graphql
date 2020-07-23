@@ -1,0 +1,5 @@
+mutation insertComponent($object: component_insert_input!) {
+  insert_component_one (object: $object){
+    id
+  }
+}

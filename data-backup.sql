@@ -731,7 +731,7 @@ ALTER SEQUENCE hdb_catalog.remote_schemas_id_seq OWNED BY hdb_catalog.remote_sch
 CREATE TABLE public.component (
     id integer NOT NULL,
     name text NOT NULL,
-    image_url text NOT NULL,
+    image_url text DEFAULT 'https://material.angular.io/assets/img/examples/shiba2.jpg'::text NOT NULL,
     stack_size integer DEFAULT 0 NOT NULL,
     sink_value integer DEFAULT 0 NOT NULL
 );
@@ -1026,7 +1026,7 @@ public	recipe	recipe_outputs	array	{"foreign_key_constraint_on": {"table": {"nam
 --
 
 COPY hdb_catalog.hdb_schema_update_event (instance_id, occurred_at, invalidations) FROM stdin;
-b4a5a346-0d50-4c15-8082-37173b3a49d0	2020-07-22 21:58:15.917083+00	{"metadata":false,"remote_schemas":[]}
+b5691f2e-1a7f-4e1f-bcbd-de1fa56fbabe	2020-07-23 11:00:35.357772+00	{"metadata":false,"remote_schemas":[]}
 \.
 
 
@@ -1092,6 +1092,7 @@ COPY hdb_catalog.remote_schemas (id, name, definition, comment) FROM stdin;
 
 COPY public.component (id, name, image_url, stack_size, sink_value) FROM stdin;
 1	Copper Ore	https://satisfactory.gamepedia.com/Copper_Ore#/media/File:Copper_Ore.png	100	3
+6	Iron Ore	https://material.angular.io/assets/img/examples/shiba2.jpg	100	1
 \.
 
 
@@ -1148,7 +1149,7 @@ SELECT pg_catalog.setval('hdb_catalog.remote_schemas_id_seq', 1, false);
 -- Name: component_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.component_id_seq', 1, true);
+SELECT pg_catalog.setval('public.component_id_seq', 6, true);
 
 
 --
