@@ -773,7 +773,8 @@ CREATE TABLE public.production_structure (
     solid_output integer DEFAULT 0 NOT NULL,
     energy_consumption numeric DEFAULT 0 NOT NULL,
     name text NOT NULL,
-    image_url text NOT NULL
+    image_url text DEFAULT 'https://material.angular.io/assets/img/examples/shiba2.jpg'::text NOT NULL,
+    subcategory text DEFAULT 'Miner'::text
 );
 
 
@@ -802,6 +803,70 @@ ALTER SEQUENCE public.production_tructure_id_seq OWNED BY public.production_stru
 
 
 --
+-- Name: recipe; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.recipe (
+    id integer NOT NULL,
+    name text NOT NULL,
+    input_slots integer DEFAULT 0 NOT NULL,
+    output_slots integer DEFAULT 1 NOT NULL,
+    production_structure_id integer NOT NULL,
+    is_alternative boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE public.recipe OWNER TO postgres;
+
+--
+-- Name: recipe_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.recipe_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.recipe_id_seq OWNER TO postgres;
+
+--
+-- Name: recipe_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.recipe_id_seq OWNED BY public.recipe.id;
+
+
+--
+-- Name: recipe_input; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.recipe_input (
+    recipe_id integer NOT NULL,
+    component_id integer NOT NULL,
+    amount numeric NOT NULL
+);
+
+
+ALTER TABLE public.recipe_input OWNER TO postgres;
+
+--
+-- Name: recipe_output; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.recipe_output (
+    recipe_id integer NOT NULL,
+    component_id integer NOT NULL,
+    amount numeric NOT NULL
+);
+
+
+ALTER TABLE public.recipe_output OWNER TO postgres;
+
+--
 -- Name: remote_schemas id; Type: DEFAULT; Schema: hdb_catalog; Owner: postgres
 --
 
@@ -820,6 +885,13 @@ ALTER TABLE ONLY public.component ALTER COLUMN id SET DEFAULT nextval('public.co
 --
 
 ALTER TABLE ONLY public.production_structure ALTER COLUMN id SET DEFAULT nextval('public.production_tructure_id_seq'::regclass);
+
+
+--
+-- Name: recipe id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe ALTER COLUMN id SET DEFAULT nextval('public.recipe_id_seq'::regclass);
 
 
 --
@@ -940,6 +1012,12 @@ hdb_catalog	hdb_function_agg	return_table_info	object	{"manual_configuration": {
 hdb_catalog	hdb_action	permissions	array	{"manual_configuration": {"remote_table": {"name": "hdb_action_permission", "schema": "hdb_catalog"}, "column_mapping": {"action_name": "action_name"}}}	\N	t
 hdb_catalog	hdb_role	action_permissions	array	{"manual_configuration": {"remote_table": {"name": "hdb_action_permission", "schema": "hdb_catalog"}, "column_mapping": {"role_name": "role_name"}}}	\N	t
 hdb_catalog	hdb_role	permissions	array	{"manual_configuration": {"remote_table": {"name": "hdb_permission_agg", "schema": "hdb_catalog"}, "column_mapping": {"role_name": "role_name"}}}	\N	t
+public	recipe	production_structure	object	{"foreign_key_constraint_on": "production_structure_id"}	\N	f
+public	production_structure	recipes	array	{"foreign_key_constraint_on": {"table": {"name": "recipe", "schema": "public"}, "column": "production_structure_id"}}	\N	f
+public	recipe_output	component	object	{"foreign_key_constraint_on": "component_id"}	\N	f
+public	recipe_output	recipe	object	{"foreign_key_constraint_on": "recipe_id"}	\N	f
+public	recipe	recipe_inputs	array	{"foreign_key_constraint_on": {"table": {"name": "recipe_input", "schema": "public"}, "column": "recipe_id"}}	\N	f
+public	recipe	recipe_outputs	array	{"foreign_key_constraint_on": {"table": {"name": "recipe_output", "schema": "public"}, "column": "recipe_id"}}	\N	f
 \.
 
 
@@ -948,7 +1026,7 @@ hdb_catalog	hdb_role	permissions	array	{"manual_configuration": {"remote_table":
 --
 
 COPY hdb_catalog.hdb_schema_update_event (instance_id, occurred_at, invalidations) FROM stdin;
-85ec01a3-15ff-41a7-b9be-0f9e1f86e4f1	2020-07-13 16:57:14.645372+00	{"metadata":false,"remote_schemas":[]}
+b4a5a346-0d50-4c15-8082-37173b3a49d0	2020-07-22 21:58:15.917083+00	{"metadata":false,"remote_schemas":[]}
 \.
 
 
@@ -985,6 +1063,9 @@ hdb_catalog	hdb_action_log	{"custom_root_fields": {}, "custom_column_names": {}}
 hdb_catalog	hdb_role	{"custom_root_fields": {}, "custom_column_names": {}}	t	f
 public	component	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
 public	production_structure	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
+public	recipe	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
+public	recipe_input	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
+public	recipe_output	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
 \.
 
 
@@ -1018,8 +1099,40 @@ COPY public.component (id, name, image_url, stack_size, sink_value) FROM stdin;
 -- Data for Name: production_structure; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.production_structure (id, liquid_input, solid_input, liquid_output, solid_output, energy_consumption, name, image_url) FROM stdin;
-1	0	0	0	1	0	Miner MK1	https://satisfactory.gamepedia.com/Miner#/media/File:Miner_Mk.1.png
+COPY public.production_structure (id, liquid_input, solid_input, liquid_output, solid_output, energy_consumption, name, image_url, subcategory) FROM stdin;
+2	0	0	0	1	12	Miner MK2	https://satisfactory.gamepedia.com/Miner#/media/File:Miner_Mk.2.png	Miner
+1	0	0	0	1	5	Miner MK1	https://satisfactory.gamepedia.com/Miner#/media/File:Miner_Mk.1.png	Miner
+3	0	0	0	1	40	Miner MK3	https://material.angular.io/assets/img/examples/shiba2.jpg	Miner
+\.
+
+
+--
+-- Data for Name: recipe; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.recipe (id, name, input_slots, output_slots, production_structure_id, is_alternative) FROM stdin;
+1	Copper Ore (Impure)	0	1	1	f
+2	Copper Ore (Normal)	0	1	1	f
+3	Copper Ore (Pure)	0	1	1	f
+\.
+
+
+--
+-- Data for Name: recipe_input; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.recipe_input (recipe_id, component_id, amount) FROM stdin;
+\.
+
+
+--
+-- Data for Name: recipe_output; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.recipe_output (recipe_id, component_id, amount) FROM stdin;
+1	1	30
+2	1	60
+3	1	120
 \.
 
 
@@ -1041,7 +1154,14 @@ SELECT pg_catalog.setval('public.component_id_seq', 1, true);
 -- Name: production_tructure_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.production_tructure_id_seq', 1, true);
+SELECT pg_catalog.setval('public.production_tructure_id_seq', 3, true);
+
+
+--
+-- Name: recipe_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.recipe_id_seq', 3, true);
 
 
 --
@@ -1189,6 +1309,30 @@ ALTER TABLE ONLY public.production_structure
 
 
 --
+-- Name: recipe_input recipe_input_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe_input
+    ADD CONSTRAINT recipe_input_pkey PRIMARY KEY (recipe_id, component_id);
+
+
+--
+-- Name: recipe_output recipe_output_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe_output
+    ADD CONSTRAINT recipe_output_pkey PRIMARY KEY (recipe_id, component_id);
+
+
+--
+-- Name: recipe recipe_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe
+    ADD CONSTRAINT recipe_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: event_invocation_logs_event_id_idx; Type: INDEX; Schema: hdb_catalog; Owner: postgres
 --
 
@@ -1298,6 +1442,46 @@ ALTER TABLE ONLY hdb_catalog.hdb_permission
 
 ALTER TABLE ONLY hdb_catalog.hdb_relationship
     ADD CONSTRAINT hdb_relationship_table_schema_table_name_fkey FOREIGN KEY (table_schema, table_name) REFERENCES hdb_catalog.hdb_table(table_schema, table_name) ON UPDATE CASCADE;
+
+
+--
+-- Name: recipe_input recipe_input_component_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe_input
+    ADD CONSTRAINT recipe_input_component_id_fkey FOREIGN KEY (component_id) REFERENCES public.component(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: recipe_input recipe_input_recipe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe_input
+    ADD CONSTRAINT recipe_input_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipe(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: recipe_output recipe_output_component_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe_output
+    ADD CONSTRAINT recipe_output_component_id_fkey FOREIGN KEY (component_id) REFERENCES public.component(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: recipe_output recipe_output_recipe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe_output
+    ADD CONSTRAINT recipe_output_recipe_id_fkey FOREIGN KEY (recipe_id) REFERENCES public.recipe(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: recipe recipe_production_structure_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recipe
+    ADD CONSTRAINT recipe_production_structure_id_fkey FOREIGN KEY (production_structure_id) REFERENCES public.production_structure(id) ON UPDATE RESTRICT ON DELETE CASCADE;
 
 
 --

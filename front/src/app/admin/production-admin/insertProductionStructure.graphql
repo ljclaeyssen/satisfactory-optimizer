@@ -1,0 +1,20 @@
+mutation insertProductionStructure(
+  $liquid_input: Int,
+  $liquid_output: Int,
+  $name: String,
+  $solid_input: Int,
+  $solid_output: Int,
+  $subcategory: String,
+  $energy_consumption: numeric) {
+  insert_production_structure_one(object: {
+    liquid_input: $liquid_input,
+    liquid_output: $liquid_output,
+    name: $name,
+    solid_input: $solid_input,
+    solid_output: $solid_output,
+    subcategory: $subcategory,
+    energy_consumption: $energy_consumption
+  }) {
+    id
+  }
+}

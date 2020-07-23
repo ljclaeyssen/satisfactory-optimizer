@@ -1,0 +1,31 @@
+<table matSort (matSortChange)="sortData($event)">
+  <tr>
+    <th mat-sort-header="name">Name</th>
+    <th mat-sort-header="infrastructure">Production Infrastructure</th>
+    <th mat-sort-header="input_slots">Component</th>
+    <th mat-sort-header="output-slots">Output</th>
+  </tr>
+  <tr *ngFor="let recipe of sortedList">
+    <th matBadge="alt"
+        matBadgePosition="after"
+        matBadgeColor="accent"
+        matBadgeOverlap="false"
+        [matBadgeHidden]="!recipe.is_alternative">{{recipe.name}}</th>
+    <td>{{recipe.production_structure.name}}</td>
+    <td>
+      <ul>
+        <li *ngFor="let input of recipe.recipe_inputs">
+          {{input.component.name}} - {{input.amount}}/min
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li *ngFor="let output of recipe.recipe_outputs">
+          {{output.component.name}} - {{output.amount}}/min
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
