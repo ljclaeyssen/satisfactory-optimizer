@@ -1,0 +1,13 @@
+query getProductionList {
+  production_structure(order_by: {name: asc}) {
+    name
+    subcategory
+    energy_consumption
+    id
+    image_url
+    recipes {
+      name
+      id
+    }
+  }
+}

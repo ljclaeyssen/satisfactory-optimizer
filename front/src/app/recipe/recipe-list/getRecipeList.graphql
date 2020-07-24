@@ -1,0 +1,19 @@
+query getRecipeList {
+  recipe(order_by: {name: asc}) {
+    id
+    name
+    input_slots
+    output_slots
+    is_alternative
+    production_structure {
+      name
+    }
+    recipe_outputs {
+      amount
+      component {
+        image_url
+        name
+      }
+    }
+  }
+}

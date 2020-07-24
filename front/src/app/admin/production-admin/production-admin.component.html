@@ -1,0 +1,55 @@
+<div class="admin-header">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+              Create a new production Infrastructure
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <form [formGroup]="newProductionForm" (ngSubmit)="submitNewProduction(newProductionForm.value)">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select formControlName="subcategory">
+              <mat-option value="Miner">Miner</mat-option>
+              <mat-option value="Liquid Production">Liquid Production</mat-option>
+              <mat-option value="Smelter">Smelter</mat-option>
+              <mat-option value="Manufacturer">Manufacturer</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Liquid Input</mat-label>
+            <input matInput type="number" formControlName="liquid_input">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Solid Input</mat-label>
+            <input matInput type="number" formControlName="solid_input">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Liquid Output</mat-label>
+            <input matInput type="number" formControlName="liquid_output">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Solid Output</mat-label>
+            <input matInput type="number" formControlName="solid_output">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Energy</mat-label>
+            <input matInput type="number" formControlName="energy_consumption">
+          </mat-form-field>
+          <button mat-raised-button color="primary"
+                  type="submit"
+                  [disabled]="newProductionForm.status === 'INVALID'">
+            Create
+          </button>
+        </form>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<app-production-list></app-production-list>

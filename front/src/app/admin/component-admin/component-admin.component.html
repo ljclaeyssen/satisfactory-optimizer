@@ -1,0 +1,35 @@
+<div class="admin-header">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Create a new Component
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <form [formGroup]="newComponentForm" (ngSubmit)="submitNewComponent(newComponentForm.value)">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Sink Value</mat-label>
+            <input matInput type="number" formControlName="sink_value">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Stack Size</mat-label>
+            <input matInput type="number" formControlName="stack_size">
+          </mat-form-field>
+          <button mat-raised-button color="primary"
+                  type="submit"
+                  [disabled]="newComponentForm.status === 'INVALID'">
+            Create
+          </button>
+        </form>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+
+<app-component-list></app-component-list>

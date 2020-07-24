@@ -1,0 +1,5 @@
+mutation insertProductionStructure($object: production_structure_insert_input!) {
+  insert_production_structure_one (object: $object){
+    id
+  }
+}
