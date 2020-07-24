@@ -1256,6 +1256,8 @@ COPY public.factory_line (id, user_id, name) FROM stdin;
 --
 
 COPY public.factory_line_level (id, id_factory_line, "position") FROM stdin;
+2	1	0
+3	1	1
 \.
 
 
@@ -1341,7 +1343,7 @@ SELECT pg_catalog.setval('public.factory_line_level_element_id_seq', 1, false);
 -- Name: factory_line_level_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.factory_line_level_id_seq', 1, false);
+SELECT pg_catalog.setval('public.factory_line_level_id_seq', 3, true);
 
 
 --

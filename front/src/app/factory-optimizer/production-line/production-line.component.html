@@ -1,5 +1,11 @@
-<div *ngIf="factoryLineId; else select_a_factory_line">
-  <app-production-line-level></app-production-line-level>
+<div *ngIf="factoryLine; else select_a_factory_line">
+  <h1>{{factoryLine.name}}</h1>
+  <app-level-adder></app-level-adder>
+  <div *ngFor="let level of factoryLine.factory_line_levels">
+    <app-production-line-level ></app-production-line-level>
+    <app-level-adder></app-level-adder>
+  </div>
+
 </div>
 
 <ng-template #select_a_factory_line>

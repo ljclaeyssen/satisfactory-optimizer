@@ -13,11 +13,12 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatInputModule} from "@angular/material/input";
+import { LevelAdderComponent } from './level-adder/level-adder.component';
 
 
 
 @NgModule({
-  declarations: [FactoryOptimizerMenuComponent, FactoryOptimizerControlsComponent, ProductionLineComponent, ProductionLineLevelComponent],
+  declarations: [FactoryOptimizerMenuComponent, FactoryOptimizerControlsComponent, ProductionLineComponent, ProductionLineLevelComponent, LevelAdderComponent],
   imports: [
     CommonModule,
     ComponentModule,
