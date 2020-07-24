@@ -8,6 +8,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module';
 import {MatTabsModule} from "@angular/material/tabs";
+import {FactoryOptimizerModule} from "./factory-optimizer/factory-optimizer.module";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {MatTabsModule} from "@angular/material/tabs";
     GraphQLModule,
     HttpClientModule,
     AdminModule,
+    FactoryOptimizerModule,
     MatTabsModule
   ],
   providers: [],
