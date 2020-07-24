@@ -1,3 +1,10 @@
-<p>factory-optimizer-menu works!</p>
-<app-factory-optimizer-controls></app-factory-optimizer-controls>
-<app-production-line></app-production-line>
+<h1>Optimizer</h1>
+<mat-drawer-container id="optimizer-container">
+  <mat-drawer mode="side" opened>
+    <app-factory-optimizer-controls (newSelectedFactoryLine)="showFactoryLine($event)"></app-factory-optimizer-controls>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-production-line [factoryLineId]="displayedFactoryLineId"></app-production-line>
+  </mat-drawer-content>
+</mat-drawer-container>
+

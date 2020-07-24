@@ -1,1 +1,29 @@
-<p>factory-optimizer-controls works!</p>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Factory Line Options
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <mat-form-field appearance="fill">
+    <mat-label>Select a Factory Line</mat-label>
+    <mat-select [(ngModel)]="selectedList" (selectionChange)="onNewSelection($event)">
+      <mat-option *ngFor="let factoryLine of factoryLineList?.factory_line"
+                  [value]="factoryLine.id">{{factoryLine.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <form [formGroup]="newFactoryLineForm" (ngSubmit)="submitNewFactoryLine(newFactoryLineForm.value)">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <button mat-raised-button color="primary"
+            type="submit"
+            [disabled]="newFactoryLineForm.status === 'INVALID'">
+      Create
+    </button>
+  </form>
+
+  <div *ngIf="selectedList?.name">
+    <button mat-flat-button color="warn">Delete Factory Line</button>
+  </div>
+</mat-expansion-panel>

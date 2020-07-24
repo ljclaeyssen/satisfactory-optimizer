@@ -1,0 +1,6 @@
+mutation insertFactoryLine($object: factory_line_insert_input!) {
+  insert_factory_line_one (object: $object){
+    id
+  }
+}
+

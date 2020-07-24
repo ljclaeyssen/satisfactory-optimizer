@@ -24,9 +24,7 @@ export class ComponentAdminComponent implements OnInit {
   }
 
   public submitNewComponent(form: Component_Insert_Input) {
-    console.log(form);
     this.insertComponentGQL.mutate({object: form}).subscribe(result => {
-      console.log(result);
       this.newComponentForm.reset();
     },
       error => console.error);

@@ -1,2 +1,7 @@
-<p>production-line works!</p>
-<app-production-line-level></app-production-line-level>
+<div *ngIf="factoryLineId; else select_a_factory_line">
+  <app-production-line-level></app-production-line-level>
+</div>
+
+<ng-template #select_a_factory_line>
+  <h1> Select a factory Line </h1>
+</ng-template>

@@ -1,10 +1,12 @@
 <table matSort (matSortChange)="sortData($event)">
   <tr>
+    <th></th>
     <th mat-sort-header="name">Name</th>
     <th mat-sort-header="sink_value">Sink Value</th>
     <th mat-sort-header="stack_size">Stack Size</th>
   </tr>
   <tr *ngFor="let component of sortedList">
+    <td> <img [src]="component.image_url"/> </td>
     <th> {{component.name}}</th>
     <th> {{component.sink_value}}</th>
     <th> {{component.stack_size}}</th>

@@ -1,0 +1,28 @@
+subscription getFactoryLineById($id: Int) {
+  factory_line(where: {id: {_eq: $id}}) {
+    name
+    factory_line_levels {
+      factory_line_level_elements {
+        production_structure {
+          name
+          image_url
+        }
+        recipe {
+          name
+          recipe_inputs {
+            amount
+            component {
+              name
+            }
+          }
+          recipe_outputs {
+            amount
+            recipe {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

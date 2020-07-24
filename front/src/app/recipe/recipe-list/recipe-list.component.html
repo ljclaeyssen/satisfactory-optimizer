@@ -15,14 +15,14 @@
     <td>
       <ul>
         <li *ngFor="let input of recipe.recipe_inputs">
-          {{input.component.name}} - {{input.amount}}/min
+          <img [src]="input.component.image_url">{{input.component.name}} - {{input.amount}}/min
         </li>
       </ul>
     </td>
     <td>
       <ul>
         <li *ngFor="let output of recipe.recipe_outputs">
-          {{output.component.name}} - {{output.amount}}/min
+          <img [src]="output.component.image_url"> {{output.component.name}} - {{output.amount}}/min
         </li>
       </ul>
     </td>

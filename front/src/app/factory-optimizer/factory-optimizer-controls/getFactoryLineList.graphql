@@ -1,0 +1,6 @@
+query getFactoryLineList {
+  factory_line {
+    id
+    name
+  }
+}

@@ -762,6 +762,114 @@ ALTER SEQUENCE public.component_id_seq OWNED BY public.component.id;
 
 
 --
+-- Name: factory_line; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.factory_line (
+    id integer NOT NULL,
+    user_id integer,
+    name text DEFAULT 'Factory Line'::text NOT NULL
+);
+
+
+ALTER TABLE public.factory_line OWNER TO postgres;
+
+--
+-- Name: factory_line_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.factory_line_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.factory_line_id_seq OWNER TO postgres;
+
+--
+-- Name: factory_line_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.factory_line_id_seq OWNED BY public.factory_line.id;
+
+
+--
+-- Name: factory_line_level; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.factory_line_level (
+    id integer NOT NULL,
+    id_factory_line integer NOT NULL,
+    "position" integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.factory_line_level OWNER TO postgres;
+
+--
+-- Name: factory_line_level_element; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.factory_line_level_element (
+    id integer NOT NULL,
+    id_factory_line_level integer NOT NULL,
+    id_production_structure integer NOT NULL,
+    id_recipe integer NOT NULL,
+    "position" integer DEFAULT 0 NOT NULL,
+    overclocking_speed integer DEFAULT 100 NOT NULL
+);
+
+
+ALTER TABLE public.factory_line_level_element OWNER TO postgres;
+
+--
+-- Name: factory_line_level_element_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.factory_line_level_element_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.factory_line_level_element_id_seq OWNER TO postgres;
+
+--
+-- Name: factory_line_level_element_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.factory_line_level_element_id_seq OWNED BY public.factory_line_level_element.id;
+
+
+--
+-- Name: factory_line_level_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.factory_line_level_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.factory_line_level_id_seq OWNER TO postgres;
+
+--
+-- Name: factory_line_level_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.factory_line_level_id_seq OWNED BY public.factory_line_level.id;
+
+
+--
 -- Name: production_structure; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -878,6 +986,27 @@ ALTER TABLE ONLY hdb_catalog.remote_schemas ALTER COLUMN id SET DEFAULT nextval(
 --
 
 ALTER TABLE ONLY public.component ALTER COLUMN id SET DEFAULT nextval('public.component_id_seq'::regclass);
+
+
+--
+-- Name: factory_line id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line ALTER COLUMN id SET DEFAULT nextval('public.factory_line_id_seq'::regclass);
+
+
+--
+-- Name: factory_line_level id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line_level ALTER COLUMN id SET DEFAULT nextval('public.factory_line_level_id_seq'::regclass);
+
+
+--
+-- Name: factory_line_level_element id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line_level_element ALTER COLUMN id SET DEFAULT nextval('public.factory_line_level_element_id_seq'::regclass);
 
 
 --
@@ -1018,6 +1147,18 @@ public	recipe_output	component	object	{"foreign_key_constraint_on": "component_i
 public	recipe_output	recipe	object	{"foreign_key_constraint_on": "recipe_id"}	\N	f
 public	recipe	recipe_inputs	array	{"foreign_key_constraint_on": {"table": {"name": "recipe_input", "schema": "public"}, "column": "recipe_id"}}	\N	f
 public	recipe	recipe_outputs	array	{"foreign_key_constraint_on": {"table": {"name": "recipe_output", "schema": "public"}, "column": "recipe_id"}}	\N	f
+public	component	recipe_outputs	array	{"foreign_key_constraint_on": {"table": {"name": "recipe_output", "schema": "public"}, "column": "component_id"}}	\N	f
+public	component	recipe_inputs	array	{"foreign_key_constraint_on": {"table": {"name": "recipe_input", "schema": "public"}, "column": "component_id"}}	\N	f
+public	recipe_input	component	object	{"foreign_key_constraint_on": "component_id"}	\N	f
+public	recipe_input	recipe	object	{"foreign_key_constraint_on": "recipe_id"}	\N	f
+public	factory_line	factory_line_levels	array	{"foreign_key_constraint_on": {"table": {"name": "factory_line_level", "schema": "public"}, "column": "id_factory_line"}}	\N	f
+public	factory_line_level	factory_line	object	{"foreign_key_constraint_on": "id_factory_line"}	\N	f
+public	production_structure	factory_line_level_elements	array	{"foreign_key_constraint_on": {"table": {"name": "factory_line_level_element", "schema": "public"}, "column": "id_production_structure"}}	\N	f
+public	recipe	factory_line_level_elements	array	{"foreign_key_constraint_on": {"table": {"name": "factory_line_level_element", "schema": "public"}, "column": "id_recipe"}}	\N	f
+public	factory_line_level	factory_line_level_elements	array	{"foreign_key_constraint_on": {"table": {"name": "factory_line_level_element", "schema": "public"}, "column": "id_factory_line_level"}}	\N	f
+public	factory_line_level_element	factory_line_level	object	{"foreign_key_constraint_on": "id_factory_line_level"}	\N	f
+public	factory_line_level_element	production_structure	object	{"foreign_key_constraint_on": "id_production_structure"}	\N	f
+public	factory_line_level_element	recipe	object	{"foreign_key_constraint_on": "id_recipe"}	\N	f
 \.
 
 
@@ -1026,7 +1167,7 @@ public	recipe	recipe_outputs	array	{"foreign_key_constraint_on": {"table": {"nam
 --
 
 COPY hdb_catalog.hdb_schema_update_event (instance_id, occurred_at, invalidations) FROM stdin;
-b5691f2e-1a7f-4e1f-bcbd-de1fa56fbabe	2020-07-23 11:00:35.357772+00	{"metadata":false,"remote_schemas":[]}
+a6b45d3c-9d7e-4312-a860-03778787ed40	2020-07-24 11:54:18.807578+00	{"metadata":false,"remote_schemas":[]}
 \.
 
 
@@ -1066,6 +1207,9 @@ public	production_structure	{"custom_root_fields": {}, "custom_column_names": {}
 public	recipe	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
 public	recipe_input	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
 public	recipe_output	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
+public	factory_line	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
+public	factory_line_level	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
+public	factory_line_level_element	{"custom_root_fields": {}, "custom_column_names": {}}	f	f
 \.
 
 
@@ -1091,8 +1235,35 @@ COPY hdb_catalog.remote_schemas (id, name, definition, comment) FROM stdin;
 --
 
 COPY public.component (id, name, image_url, stack_size, sink_value) FROM stdin;
-1	Copper Ore	https://satisfactory.gamepedia.com/Copper_Ore#/media/File:Copper_Ore.png	100	3
-6	Iron Ore	https://material.angular.io/assets/img/examples/shiba2.jpg	100	1
+1	Copper Ore	https://gamepedia.cursecdn.com/satisfactory_gamepedia_en/7/78/Copper_Ore.png	100	3
+6	Iron Ore	https://gamepedia.cursecdn.com/satisfactory_gamepedia_en/8/87/Iron_Ore.png	100	1
+\.
+
+
+--
+-- Data for Name: factory_line; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.factory_line (id, user_id, name) FROM stdin;
+1	\N	myFirstFactoryLine
+2	\N	aaaa
+3	\N	Oui
+\.
+
+
+--
+-- Data for Name: factory_line_level; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.factory_line_level (id, id_factory_line, "position") FROM stdin;
+\.
+
+
+--
+-- Data for Name: factory_line_level_element; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.factory_line_level_element (id, id_factory_line_level, id_production_structure, id_recipe, "position", overclocking_speed) FROM stdin;
 \.
 
 
@@ -1101,10 +1272,10 @@ COPY public.component (id, name, image_url, stack_size, sink_value) FROM stdin;
 --
 
 COPY public.production_structure (id, liquid_input, solid_input, liquid_output, solid_output, energy_consumption, name, image_url, subcategory) FROM stdin;
-2	0	0	0	1	12	Miner MK2	https://satisfactory.gamepedia.com/Miner#/media/File:Miner_Mk.2.png	Miner
-1	0	0	0	1	5	Miner MK1	https://satisfactory.gamepedia.com/Miner#/media/File:Miner_Mk.1.png	Miner
-3	0	0	0	1	40	Miner MK3	https://material.angular.io/assets/img/examples/shiba2.jpg	Miner
-4	0	1	0	1	4	Constructor	https://material.angular.io/assets/img/examples/shiba2.jpg	Manufacturer
+1	0	0	0	1	5	Miner MK1	https://gamepedia.cursecdn.com/satisfactory_gamepedia_en/c/cf/Miner_Mk.1.png	Miner
+2	0	0	0	1	12	Miner MK2	https://gamepedia.cursecdn.com/satisfactory_gamepedia_en/a/aa/Miner_Mk.2.png	Miner
+4	0	1	0	1	4	Constructor	https://gamepedia.cursecdn.com/satisfactory_gamepedia_en/6/61/Constructor.png?	Manufacturer
+3	0	0	0	1	40	Miner MK3	https://gamepedia.cursecdn.com/satisfactory_gamepedia_en/5/58/Miner_Mk.3.png	Miner
 \.
 
 
@@ -1153,10 +1324,31 @@ SELECT pg_catalog.setval('public.component_id_seq', 6, true);
 
 
 --
+-- Name: factory_line_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.factory_line_id_seq', 3, true);
+
+
+--
+-- Name: factory_line_level_element_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.factory_line_level_element_id_seq', 1, false);
+
+
+--
+-- Name: factory_line_level_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.factory_line_level_id_seq', 1, false);
+
+
+--
 -- Name: production_tructure_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.production_tructure_id_seq', 4, true);
+SELECT pg_catalog.setval('public.production_tructure_id_seq', 6, true);
 
 
 --
@@ -1303,6 +1495,30 @@ ALTER TABLE ONLY public.component
 
 
 --
+-- Name: factory_line_level_element factory_line_level_element_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line_level_element
+    ADD CONSTRAINT factory_line_level_element_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: factory_line_level factory_line_level_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line_level
+    ADD CONSTRAINT factory_line_level_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: factory_line factory_line_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line
+    ADD CONSTRAINT factory_line_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: production_structure production_tructure_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1444,6 +1660,38 @@ ALTER TABLE ONLY hdb_catalog.hdb_permission
 
 ALTER TABLE ONLY hdb_catalog.hdb_relationship
     ADD CONSTRAINT hdb_relationship_table_schema_table_name_fkey FOREIGN KEY (table_schema, table_name) REFERENCES hdb_catalog.hdb_table(table_schema, table_name) ON UPDATE CASCADE;
+
+
+--
+-- Name: factory_line_level_element factory_line_level_element_id_factory_line_level_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line_level_element
+    ADD CONSTRAINT factory_line_level_element_id_factory_line_level_fkey FOREIGN KEY (id_factory_line_level) REFERENCES public.factory_line_level(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: factory_line_level_element factory_line_level_element_id_production_structure_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line_level_element
+    ADD CONSTRAINT factory_line_level_element_id_production_structure_fkey FOREIGN KEY (id_production_structure) REFERENCES public.production_structure(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: factory_line_level_element factory_line_level_element_id_recipe_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line_level_element
+    ADD CONSTRAINT factory_line_level_element_id_recipe_fkey FOREIGN KEY (id_recipe) REFERENCES public.recipe(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- Name: factory_line_level factory_line_level_id_factory_line_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.factory_line_level
+    ADD CONSTRAINT factory_line_level_id_factory_line_fkey FOREIGN KEY (id_factory_line) REFERENCES public.factory_line(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 
 --

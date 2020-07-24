@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-production-line',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./production-line.component.scss']
 })
 export class ProductionLineComponent implements OnInit {
+
+  @Input()
+  factoryLineId: number;
 
   constructor() { }
 

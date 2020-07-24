@@ -34,8 +34,56 @@ export type Component = {
   id: Scalars['Int'];
   image_url: Scalars['String'];
   name: Scalars['String'];
+  /** An array relationship */
+  recipe_inputs: Array<Recipe_Input>;
+  /** An aggregated array relationship */
+  recipe_inputs_aggregate: Recipe_Input_Aggregate;
+  /** An array relationship */
+  recipe_outputs: Array<Recipe_Output>;
+  /** An aggregated array relationship */
+  recipe_outputs_aggregate: Recipe_Output_Aggregate;
   sink_value: Scalars['Int'];
   stack_size: Scalars['Int'];
+};
+
+
+/** columns and relationships of "component" */
+export type ComponentRecipe_InputsArgs = {
+  distinct_on?: Maybe<Array<Recipe_Input_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Input_Order_By>>;
+  where?: Maybe<Recipe_Input_Bool_Exp>;
+};
+
+
+/** columns and relationships of "component" */
+export type ComponentRecipe_Inputs_AggregateArgs = {
+  distinct_on?: Maybe<Array<Recipe_Input_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Input_Order_By>>;
+  where?: Maybe<Recipe_Input_Bool_Exp>;
+};
+
+
+/** columns and relationships of "component" */
+export type ComponentRecipe_OutputsArgs = {
+  distinct_on?: Maybe<Array<Recipe_Output_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Output_Order_By>>;
+  where?: Maybe<Recipe_Output_Bool_Exp>;
+};
+
+
+/** columns and relationships of "component" */
+export type ComponentRecipe_Outputs_AggregateArgs = {
+  distinct_on?: Maybe<Array<Recipe_Output_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Recipe_Output_Order_By>>;
+  where?: Maybe<Recipe_Output_Bool_Exp>;
 };
 
 /** aggregated selection of "component" */
@@ -112,6 +160,8 @@ export type Component_Bool_Exp = {
   id?: Maybe<Int_Comparison_Exp>;
   image_url?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  recipe_inputs?: Maybe<Recipe_Input_Bool_Exp>;
+  recipe_outputs?: Maybe<Recipe_Output_Bool_Exp>;
   sink_value?: Maybe<Int_Comparison_Exp>;
   stack_size?: Maybe<Int_Comparison_Exp>;
 };
@@ -134,6 +184,8 @@ export type Component_Insert_Input = {
   id?: Maybe<Scalars['Int']>;
   image_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  recipe_inputs?: Maybe<Recipe_Input_Arr_Rel_Insert_Input>;
+  recipe_outputs?: Maybe<Recipe_Output_Arr_Rel_Insert_Input>;
   sink_value?: Maybe<Scalars['Int']>;
   stack_size?: Maybe<Scalars['Int']>;
 };
@@ -203,6 +255,8 @@ export type Component_Order_By = {
   id?: Maybe<Order_By>;
   image_url?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  recipe_inputs_aggregate?: Maybe<Recipe_Input_Aggregate_Order_By>;
+  recipe_outputs_aggregate?: Maybe<Recipe_Output_Aggregate_Order_By>;
   sink_value?: Maybe<Order_By>;
   stack_size?: Maybe<Order_By>;
 };
@@ -354,6 +408,1053 @@ export type Component_Variance_Order_By = {
   stack_size?: Maybe<Order_By>;
 };
 
+/** columns and relationships of "factory_line" */
+export type Factory_Line = {
+  __typename?: 'factory_line';
+  /** An array relationship */
+  factory_line_levels: Array<Factory_Line_Level>;
+  /** An aggregated array relationship */
+  factory_line_levels_aggregate: Factory_Line_Level_Aggregate;
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+
+/** columns and relationships of "factory_line" */
+export type Factory_LineFactory_Line_LevelsArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Bool_Exp>;
+};
+
+
+/** columns and relationships of "factory_line" */
+export type Factory_LineFactory_Line_Levels_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Bool_Exp>;
+};
+
+/** aggregated selection of "factory_line" */
+export type Factory_Line_Aggregate = {
+  __typename?: 'factory_line_aggregate';
+  aggregate?: Maybe<Factory_Line_Aggregate_Fields>;
+  nodes: Array<Factory_Line>;
+};
+
+/** aggregate fields of "factory_line" */
+export type Factory_Line_Aggregate_Fields = {
+  __typename?: 'factory_line_aggregate_fields';
+  avg?: Maybe<Factory_Line_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Factory_Line_Max_Fields>;
+  min?: Maybe<Factory_Line_Min_Fields>;
+  stddev?: Maybe<Factory_Line_Stddev_Fields>;
+  stddev_pop?: Maybe<Factory_Line_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Factory_Line_Stddev_Samp_Fields>;
+  sum?: Maybe<Factory_Line_Sum_Fields>;
+  var_pop?: Maybe<Factory_Line_Var_Pop_Fields>;
+  var_samp?: Maybe<Factory_Line_Var_Samp_Fields>;
+  variance?: Maybe<Factory_Line_Variance_Fields>;
+};
+
+
+/** aggregate fields of "factory_line" */
+export type Factory_Line_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Factory_Line_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "factory_line" */
+export type Factory_Line_Aggregate_Order_By = {
+  avg?: Maybe<Factory_Line_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Factory_Line_Max_Order_By>;
+  min?: Maybe<Factory_Line_Min_Order_By>;
+  stddev?: Maybe<Factory_Line_Stddev_Order_By>;
+  stddev_pop?: Maybe<Factory_Line_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Factory_Line_Stddev_Samp_Order_By>;
+  sum?: Maybe<Factory_Line_Sum_Order_By>;
+  var_pop?: Maybe<Factory_Line_Var_Pop_Order_By>;
+  var_samp?: Maybe<Factory_Line_Var_Samp_Order_By>;
+  variance?: Maybe<Factory_Line_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "factory_line" */
+export type Factory_Line_Arr_Rel_Insert_Input = {
+  data: Array<Factory_Line_Insert_Input>;
+  on_conflict?: Maybe<Factory_Line_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Factory_Line_Avg_Fields = {
+  __typename?: 'factory_line_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "factory_line" */
+export type Factory_Line_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "factory_line". All fields are combined with a logical 'AND'. */
+export type Factory_Line_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Factory_Line_Bool_Exp>>>;
+  _not?: Maybe<Factory_Line_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Factory_Line_Bool_Exp>>>;
+  factory_line_levels?: Maybe<Factory_Line_Level_Bool_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  user_id?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "factory_line" */
+export enum Factory_Line_Constraint {
+  /** unique or primary key constraint */
+  FactoryLinePkey = 'factory_line_pkey'
+}
+
+/** input type for incrementing integer column in table "factory_line" */
+export type Factory_Line_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "factory_line" */
+export type Factory_Line_Insert_Input = {
+  factory_line_levels?: Maybe<Factory_Line_Level_Arr_Rel_Insert_Input>;
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** columns and relationships of "factory_line_level" */
+export type Factory_Line_Level = {
+  __typename?: 'factory_line_level';
+  /** An object relationship */
+  factory_line: Factory_Line;
+  /** An array relationship */
+  factory_line_level_elements: Array<Factory_Line_Level_Element>;
+  /** An aggregated array relationship */
+  factory_line_level_elements_aggregate: Factory_Line_Level_Element_Aggregate;
+  id: Scalars['Int'];
+  id_factory_line: Scalars['Int'];
+  position: Scalars['Int'];
+};
+
+
+/** columns and relationships of "factory_line_level" */
+export type Factory_Line_LevelFactory_Line_Level_ElementsArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+
+/** columns and relationships of "factory_line_level" */
+export type Factory_Line_LevelFactory_Line_Level_Elements_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+/** aggregated selection of "factory_line_level" */
+export type Factory_Line_Level_Aggregate = {
+  __typename?: 'factory_line_level_aggregate';
+  aggregate?: Maybe<Factory_Line_Level_Aggregate_Fields>;
+  nodes: Array<Factory_Line_Level>;
+};
+
+/** aggregate fields of "factory_line_level" */
+export type Factory_Line_Level_Aggregate_Fields = {
+  __typename?: 'factory_line_level_aggregate_fields';
+  avg?: Maybe<Factory_Line_Level_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Factory_Line_Level_Max_Fields>;
+  min?: Maybe<Factory_Line_Level_Min_Fields>;
+  stddev?: Maybe<Factory_Line_Level_Stddev_Fields>;
+  stddev_pop?: Maybe<Factory_Line_Level_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Factory_Line_Level_Stddev_Samp_Fields>;
+  sum?: Maybe<Factory_Line_Level_Sum_Fields>;
+  var_pop?: Maybe<Factory_Line_Level_Var_Pop_Fields>;
+  var_samp?: Maybe<Factory_Line_Level_Var_Samp_Fields>;
+  variance?: Maybe<Factory_Line_Level_Variance_Fields>;
+};
+
+
+/** aggregate fields of "factory_line_level" */
+export type Factory_Line_Level_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Factory_Line_Level_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "factory_line_level" */
+export type Factory_Line_Level_Aggregate_Order_By = {
+  avg?: Maybe<Factory_Line_Level_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Factory_Line_Level_Max_Order_By>;
+  min?: Maybe<Factory_Line_Level_Min_Order_By>;
+  stddev?: Maybe<Factory_Line_Level_Stddev_Order_By>;
+  stddev_pop?: Maybe<Factory_Line_Level_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Factory_Line_Level_Stddev_Samp_Order_By>;
+  sum?: Maybe<Factory_Line_Level_Sum_Order_By>;
+  var_pop?: Maybe<Factory_Line_Level_Var_Pop_Order_By>;
+  var_samp?: Maybe<Factory_Line_Level_Var_Samp_Order_By>;
+  variance?: Maybe<Factory_Line_Level_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "factory_line_level" */
+export type Factory_Line_Level_Arr_Rel_Insert_Input = {
+  data: Array<Factory_Line_Level_Insert_Input>;
+  on_conflict?: Maybe<Factory_Line_Level_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Factory_Line_Level_Avg_Fields = {
+  __typename?: 'factory_line_level_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "factory_line_level". All fields are combined with a logical 'AND'. */
+export type Factory_Line_Level_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Factory_Line_Level_Bool_Exp>>>;
+  _not?: Maybe<Factory_Line_Level_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Factory_Line_Level_Bool_Exp>>>;
+  factory_line?: Maybe<Factory_Line_Bool_Exp>;
+  factory_line_level_elements?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  id_factory_line?: Maybe<Int_Comparison_Exp>;
+  position?: Maybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "factory_line_level" */
+export enum Factory_Line_Level_Constraint {
+  /** unique or primary key constraint */
+  FactoryLineLevelPkey = 'factory_line_level_pkey'
+}
+
+/** columns and relationships of "factory_line_level_element" */
+export type Factory_Line_Level_Element = {
+  __typename?: 'factory_line_level_element';
+  /** An object relationship */
+  factory_line_level: Factory_Line_Level;
+  id: Scalars['Int'];
+  id_factory_line_level: Scalars['Int'];
+  id_production_structure: Scalars['Int'];
+  id_recipe: Scalars['Int'];
+  overclocking_speed: Scalars['Int'];
+  position: Scalars['Int'];
+  /** An object relationship */
+  production_structure: Production_Structure;
+  /** An object relationship */
+  recipe: Recipe;
+};
+
+/** aggregated selection of "factory_line_level_element" */
+export type Factory_Line_Level_Element_Aggregate = {
+  __typename?: 'factory_line_level_element_aggregate';
+  aggregate?: Maybe<Factory_Line_Level_Element_Aggregate_Fields>;
+  nodes: Array<Factory_Line_Level_Element>;
+};
+
+/** aggregate fields of "factory_line_level_element" */
+export type Factory_Line_Level_Element_Aggregate_Fields = {
+  __typename?: 'factory_line_level_element_aggregate_fields';
+  avg?: Maybe<Factory_Line_Level_Element_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Factory_Line_Level_Element_Max_Fields>;
+  min?: Maybe<Factory_Line_Level_Element_Min_Fields>;
+  stddev?: Maybe<Factory_Line_Level_Element_Stddev_Fields>;
+  stddev_pop?: Maybe<Factory_Line_Level_Element_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Factory_Line_Level_Element_Stddev_Samp_Fields>;
+  sum?: Maybe<Factory_Line_Level_Element_Sum_Fields>;
+  var_pop?: Maybe<Factory_Line_Level_Element_Var_Pop_Fields>;
+  var_samp?: Maybe<Factory_Line_Level_Element_Var_Samp_Fields>;
+  variance?: Maybe<Factory_Line_Level_Element_Variance_Fields>;
+};
+
+
+/** aggregate fields of "factory_line_level_element" */
+export type Factory_Line_Level_Element_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Aggregate_Order_By = {
+  avg?: Maybe<Factory_Line_Level_Element_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Factory_Line_Level_Element_Max_Order_By>;
+  min?: Maybe<Factory_Line_Level_Element_Min_Order_By>;
+  stddev?: Maybe<Factory_Line_Level_Element_Stddev_Order_By>;
+  stddev_pop?: Maybe<Factory_Line_Level_Element_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Factory_Line_Level_Element_Stddev_Samp_Order_By>;
+  sum?: Maybe<Factory_Line_Level_Element_Sum_Order_By>;
+  var_pop?: Maybe<Factory_Line_Level_Element_Var_Pop_Order_By>;
+  var_samp?: Maybe<Factory_Line_Level_Element_Var_Samp_Order_By>;
+  variance?: Maybe<Factory_Line_Level_Element_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Arr_Rel_Insert_Input = {
+  data: Array<Factory_Line_Level_Element_Insert_Input>;
+  on_conflict?: Maybe<Factory_Line_Level_Element_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Factory_Line_Level_Element_Avg_Fields = {
+  __typename?: 'factory_line_level_element_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line_level?: Maybe<Scalars['Float']>;
+  id_production_structure?: Maybe<Scalars['Float']>;
+  id_recipe?: Maybe<Scalars['Float']>;
+  overclocking_speed?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "factory_line_level_element". All fields are combined with a logical 'AND'. */
+export type Factory_Line_Level_Element_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Factory_Line_Level_Element_Bool_Exp>>>;
+  _not?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Factory_Line_Level_Element_Bool_Exp>>>;
+  factory_line_level?: Maybe<Factory_Line_Level_Bool_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  id_factory_line_level?: Maybe<Int_Comparison_Exp>;
+  id_production_structure?: Maybe<Int_Comparison_Exp>;
+  id_recipe?: Maybe<Int_Comparison_Exp>;
+  overclocking_speed?: Maybe<Int_Comparison_Exp>;
+  position?: Maybe<Int_Comparison_Exp>;
+  production_structure?: Maybe<Production_Structure_Bool_Exp>;
+  recipe?: Maybe<Recipe_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "factory_line_level_element" */
+export enum Factory_Line_Level_Element_Constraint {
+  /** unique or primary key constraint */
+  FactoryLineLevelElementPkey = 'factory_line_level_element_pkey'
+}
+
+/** input type for incrementing integer column in table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line_level?: Maybe<Scalars['Int']>;
+  id_production_structure?: Maybe<Scalars['Int']>;
+  id_recipe?: Maybe<Scalars['Int']>;
+  overclocking_speed?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Insert_Input = {
+  factory_line_level?: Maybe<Factory_Line_Level_Obj_Rel_Insert_Input>;
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line_level?: Maybe<Scalars['Int']>;
+  id_production_structure?: Maybe<Scalars['Int']>;
+  id_recipe?: Maybe<Scalars['Int']>;
+  overclocking_speed?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+  production_structure?: Maybe<Production_Structure_Obj_Rel_Insert_Input>;
+  recipe?: Maybe<Recipe_Obj_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type Factory_Line_Level_Element_Max_Fields = {
+  __typename?: 'factory_line_level_element_max_fields';
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line_level?: Maybe<Scalars['Int']>;
+  id_production_structure?: Maybe<Scalars['Int']>;
+  id_recipe?: Maybe<Scalars['Int']>;
+  overclocking_speed?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Max_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Factory_Line_Level_Element_Min_Fields = {
+  __typename?: 'factory_line_level_element_min_fields';
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line_level?: Maybe<Scalars['Int']>;
+  id_production_structure?: Maybe<Scalars['Int']>;
+  id_recipe?: Maybe<Scalars['Int']>;
+  overclocking_speed?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Min_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Mutation_Response = {
+  __typename?: 'factory_line_level_element_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Factory_Line_Level_Element>;
+};
+
+/** input type for inserting object relation for remote table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Obj_Rel_Insert_Input = {
+  data: Factory_Line_Level_Element_Insert_Input;
+  on_conflict?: Maybe<Factory_Line_Level_Element_On_Conflict>;
+};
+
+/** on conflict condition type for table "factory_line_level_element" */
+export type Factory_Line_Level_Element_On_Conflict = {
+  constraint: Factory_Line_Level_Element_Constraint;
+  update_columns: Array<Factory_Line_Level_Element_Update_Column>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "factory_line_level_element" */
+export type Factory_Line_Level_Element_Order_By = {
+  factory_line_level?: Maybe<Factory_Line_Level_Order_By>;
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+  production_structure?: Maybe<Production_Structure_Order_By>;
+  recipe?: Maybe<Recipe_Order_By>;
+};
+
+/** primary key columns input for table: "factory_line_level_element" */
+export type Factory_Line_Level_Element_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "factory_line_level_element" */
+export enum Factory_Line_Level_Element_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IdFactoryLineLevel = 'id_factory_line_level',
+  /** column name */
+  IdProductionStructure = 'id_production_structure',
+  /** column name */
+  IdRecipe = 'id_recipe',
+  /** column name */
+  OverclockingSpeed = 'overclocking_speed',
+  /** column name */
+  Position = 'position'
+}
+
+/** input type for updating data in table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Set_Input = {
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line_level?: Maybe<Scalars['Int']>;
+  id_production_structure?: Maybe<Scalars['Int']>;
+  id_recipe?: Maybe<Scalars['Int']>;
+  overclocking_speed?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Factory_Line_Level_Element_Stddev_Fields = {
+  __typename?: 'factory_line_level_element_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line_level?: Maybe<Scalars['Float']>;
+  id_production_structure?: Maybe<Scalars['Float']>;
+  id_recipe?: Maybe<Scalars['Float']>;
+  overclocking_speed?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Factory_Line_Level_Element_Stddev_Pop_Fields = {
+  __typename?: 'factory_line_level_element_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line_level?: Maybe<Scalars['Float']>;
+  id_production_structure?: Maybe<Scalars['Float']>;
+  id_recipe?: Maybe<Scalars['Float']>;
+  overclocking_speed?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Factory_Line_Level_Element_Stddev_Samp_Fields = {
+  __typename?: 'factory_line_level_element_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line_level?: Maybe<Scalars['Float']>;
+  id_production_structure?: Maybe<Scalars['Float']>;
+  id_recipe?: Maybe<Scalars['Float']>;
+  overclocking_speed?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Factory_Line_Level_Element_Sum_Fields = {
+  __typename?: 'factory_line_level_element_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line_level?: Maybe<Scalars['Int']>;
+  id_production_structure?: Maybe<Scalars['Int']>;
+  id_recipe?: Maybe<Scalars['Int']>;
+  overclocking_speed?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** update columns of table "factory_line_level_element" */
+export enum Factory_Line_Level_Element_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IdFactoryLineLevel = 'id_factory_line_level',
+  /** column name */
+  IdProductionStructure = 'id_production_structure',
+  /** column name */
+  IdRecipe = 'id_recipe',
+  /** column name */
+  OverclockingSpeed = 'overclocking_speed',
+  /** column name */
+  Position = 'position'
+}
+
+/** aggregate var_pop on columns */
+export type Factory_Line_Level_Element_Var_Pop_Fields = {
+  __typename?: 'factory_line_level_element_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line_level?: Maybe<Scalars['Float']>;
+  id_production_structure?: Maybe<Scalars['Float']>;
+  id_recipe?: Maybe<Scalars['Float']>;
+  overclocking_speed?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Factory_Line_Level_Element_Var_Samp_Fields = {
+  __typename?: 'factory_line_level_element_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line_level?: Maybe<Scalars['Float']>;
+  id_production_structure?: Maybe<Scalars['Float']>;
+  id_recipe?: Maybe<Scalars['Float']>;
+  overclocking_speed?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Factory_Line_Level_Element_Variance_Fields = {
+  __typename?: 'factory_line_level_element_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line_level?: Maybe<Scalars['Float']>;
+  id_production_structure?: Maybe<Scalars['Float']>;
+  id_recipe?: Maybe<Scalars['Float']>;
+  overclocking_speed?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "factory_line_level_element" */
+export type Factory_Line_Level_Element_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line_level?: Maybe<Order_By>;
+  id_production_structure?: Maybe<Order_By>;
+  id_recipe?: Maybe<Order_By>;
+  overclocking_speed?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** input type for incrementing integer column in table "factory_line_level" */
+export type Factory_Line_Level_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "factory_line_level" */
+export type Factory_Line_Level_Insert_Input = {
+  factory_line?: Maybe<Factory_Line_Obj_Rel_Insert_Input>;
+  factory_line_level_elements?: Maybe<Factory_Line_Level_Element_Arr_Rel_Insert_Input>;
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Factory_Line_Level_Max_Fields = {
+  __typename?: 'factory_line_level_max_fields';
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Max_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Factory_Line_Level_Min_Fields = {
+  __typename?: 'factory_line_level_min_fields';
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Min_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "factory_line_level" */
+export type Factory_Line_Level_Mutation_Response = {
+  __typename?: 'factory_line_level_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Factory_Line_Level>;
+};
+
+/** input type for inserting object relation for remote table "factory_line_level" */
+export type Factory_Line_Level_Obj_Rel_Insert_Input = {
+  data: Factory_Line_Level_Insert_Input;
+  on_conflict?: Maybe<Factory_Line_Level_On_Conflict>;
+};
+
+/** on conflict condition type for table "factory_line_level" */
+export type Factory_Line_Level_On_Conflict = {
+  constraint: Factory_Line_Level_Constraint;
+  update_columns: Array<Factory_Line_Level_Update_Column>;
+  where?: Maybe<Factory_Line_Level_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "factory_line_level" */
+export type Factory_Line_Level_Order_By = {
+  factory_line?: Maybe<Factory_Line_Order_By>;
+  factory_line_level_elements_aggregate?: Maybe<Factory_Line_Level_Element_Aggregate_Order_By>;
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "factory_line_level" */
+export type Factory_Line_Level_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "factory_line_level" */
+export enum Factory_Line_Level_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IdFactoryLine = 'id_factory_line',
+  /** column name */
+  Position = 'position'
+}
+
+/** input type for updating data in table "factory_line_level" */
+export type Factory_Line_Level_Set_Input = {
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Factory_Line_Level_Stddev_Fields = {
+  __typename?: 'factory_line_level_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Factory_Line_Level_Stddev_Pop_Fields = {
+  __typename?: 'factory_line_level_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Factory_Line_Level_Stddev_Samp_Fields = {
+  __typename?: 'factory_line_level_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Factory_Line_Level_Sum_Fields = {
+  __typename?: 'factory_line_level_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  id_factory_line?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** update columns of table "factory_line_level" */
+export enum Factory_Line_Level_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  IdFactoryLine = 'id_factory_line',
+  /** column name */
+  Position = 'position'
+}
+
+/** aggregate var_pop on columns */
+export type Factory_Line_Level_Var_Pop_Fields = {
+  __typename?: 'factory_line_level_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Factory_Line_Level_Var_Samp_Fields = {
+  __typename?: 'factory_line_level_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Factory_Line_Level_Variance_Fields = {
+  __typename?: 'factory_line_level_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  id_factory_line?: Maybe<Scalars['Float']>;
+  position?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "factory_line_level" */
+export type Factory_Line_Level_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  id_factory_line?: Maybe<Order_By>;
+  position?: Maybe<Order_By>;
+};
+
+/** aggregate max on columns */
+export type Factory_Line_Max_Fields = {
+  __typename?: 'factory_line_max_fields';
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "factory_line" */
+export type Factory_Line_Max_Order_By = {
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Factory_Line_Min_Fields = {
+  __typename?: 'factory_line_min_fields';
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "factory_line" */
+export type Factory_Line_Min_Order_By = {
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "factory_line" */
+export type Factory_Line_Mutation_Response = {
+  __typename?: 'factory_line_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Factory_Line>;
+};
+
+/** input type for inserting object relation for remote table "factory_line" */
+export type Factory_Line_Obj_Rel_Insert_Input = {
+  data: Factory_Line_Insert_Input;
+  on_conflict?: Maybe<Factory_Line_On_Conflict>;
+};
+
+/** on conflict condition type for table "factory_line" */
+export type Factory_Line_On_Conflict = {
+  constraint: Factory_Line_Constraint;
+  update_columns: Array<Factory_Line_Update_Column>;
+  where?: Maybe<Factory_Line_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "factory_line" */
+export type Factory_Line_Order_By = {
+  factory_line_levels_aggregate?: Maybe<Factory_Line_Level_Aggregate_Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "factory_line" */
+export type Factory_Line_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "factory_line" */
+export enum Factory_Line_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "factory_line" */
+export type Factory_Line_Set_Input = {
+  id?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Factory_Line_Stddev_Fields = {
+  __typename?: 'factory_line_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "factory_line" */
+export type Factory_Line_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Factory_Line_Stddev_Pop_Fields = {
+  __typename?: 'factory_line_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "factory_line" */
+export type Factory_Line_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Factory_Line_Stddev_Samp_Fields = {
+  __typename?: 'factory_line_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "factory_line" */
+export type Factory_Line_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Factory_Line_Sum_Fields = {
+  __typename?: 'factory_line_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "factory_line" */
+export type Factory_Line_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** update columns of table "factory_line" */
+export enum Factory_Line_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** aggregate var_pop on columns */
+export type Factory_Line_Var_Pop_Fields = {
+  __typename?: 'factory_line_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "factory_line" */
+export type Factory_Line_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Factory_Line_Var_Samp_Fields = {
+  __typename?: 'factory_line_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "factory_line" */
+export type Factory_Line_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Factory_Line_Variance_Fields = {
+  __typename?: 'factory_line_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  user_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "factory_line" */
+export type Factory_Line_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
 /** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: Maybe<Scalars['Int']>;
@@ -374,6 +1475,18 @@ export type Mutation_Root = {
   delete_component?: Maybe<Component_Mutation_Response>;
   /** delete single row from the table: "component" */
   delete_component_by_pk?: Maybe<Component>;
+  /** delete data from the table: "factory_line" */
+  delete_factory_line?: Maybe<Factory_Line_Mutation_Response>;
+  /** delete single row from the table: "factory_line" */
+  delete_factory_line_by_pk?: Maybe<Factory_Line>;
+  /** delete data from the table: "factory_line_level" */
+  delete_factory_line_level?: Maybe<Factory_Line_Level_Mutation_Response>;
+  /** delete single row from the table: "factory_line_level" */
+  delete_factory_line_level_by_pk?: Maybe<Factory_Line_Level>;
+  /** delete data from the table: "factory_line_level_element" */
+  delete_factory_line_level_element?: Maybe<Factory_Line_Level_Element_Mutation_Response>;
+  /** delete single row from the table: "factory_line_level_element" */
+  delete_factory_line_level_element_by_pk?: Maybe<Factory_Line_Level_Element>;
   /** delete data from the table: "production_structure" */
   delete_production_structure?: Maybe<Production_Structure_Mutation_Response>;
   /** delete single row from the table: "production_structure" */
@@ -394,6 +1507,18 @@ export type Mutation_Root = {
   insert_component?: Maybe<Component_Mutation_Response>;
   /** insert a single row into the table: "component" */
   insert_component_one?: Maybe<Component>;
+  /** insert data into the table: "factory_line" */
+  insert_factory_line?: Maybe<Factory_Line_Mutation_Response>;
+  /** insert data into the table: "factory_line_level" */
+  insert_factory_line_level?: Maybe<Factory_Line_Level_Mutation_Response>;
+  /** insert data into the table: "factory_line_level_element" */
+  insert_factory_line_level_element?: Maybe<Factory_Line_Level_Element_Mutation_Response>;
+  /** insert a single row into the table: "factory_line_level_element" */
+  insert_factory_line_level_element_one?: Maybe<Factory_Line_Level_Element>;
+  /** insert a single row into the table: "factory_line_level" */
+  insert_factory_line_level_one?: Maybe<Factory_Line_Level>;
+  /** insert a single row into the table: "factory_line" */
+  insert_factory_line_one?: Maybe<Factory_Line>;
   /** insert data into the table: "production_structure" */
   insert_production_structure?: Maybe<Production_Structure_Mutation_Response>;
   /** insert a single row into the table: "production_structure" */
@@ -414,6 +1539,18 @@ export type Mutation_Root = {
   update_component?: Maybe<Component_Mutation_Response>;
   /** update single row of the table: "component" */
   update_component_by_pk?: Maybe<Component>;
+  /** update data of the table: "factory_line" */
+  update_factory_line?: Maybe<Factory_Line_Mutation_Response>;
+  /** update single row of the table: "factory_line" */
+  update_factory_line_by_pk?: Maybe<Factory_Line>;
+  /** update data of the table: "factory_line_level" */
+  update_factory_line_level?: Maybe<Factory_Line_Level_Mutation_Response>;
+  /** update single row of the table: "factory_line_level" */
+  update_factory_line_level_by_pk?: Maybe<Factory_Line_Level>;
+  /** update data of the table: "factory_line_level_element" */
+  update_factory_line_level_element?: Maybe<Factory_Line_Level_Element_Mutation_Response>;
+  /** update single row of the table: "factory_line_level_element" */
+  update_factory_line_level_element_by_pk?: Maybe<Factory_Line_Level_Element>;
   /** update data of the table: "production_structure" */
   update_production_structure?: Maybe<Production_Structure_Mutation_Response>;
   /** update single row of the table: "production_structure" */
@@ -441,6 +1578,42 @@ export type Mutation_RootDelete_ComponentArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Component_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Factory_LineArgs = {
+  where: Factory_Line_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Factory_Line_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Factory_Line_LevelArgs = {
+  where: Factory_Line_Level_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Factory_Line_Level_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Factory_Line_Level_ElementArgs = {
+  where: Factory_Line_Level_Element_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Factory_Line_Level_Element_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -506,6 +1679,48 @@ export type Mutation_RootInsert_ComponentArgs = {
 export type Mutation_RootInsert_Component_OneArgs = {
   object: Component_Insert_Input;
   on_conflict?: Maybe<Component_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Factory_LineArgs = {
+  objects: Array<Factory_Line_Insert_Input>;
+  on_conflict?: Maybe<Factory_Line_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Factory_Line_LevelArgs = {
+  objects: Array<Factory_Line_Level_Insert_Input>;
+  on_conflict?: Maybe<Factory_Line_Level_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Factory_Line_Level_ElementArgs = {
+  objects: Array<Factory_Line_Level_Element_Insert_Input>;
+  on_conflict?: Maybe<Factory_Line_Level_Element_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Factory_Line_Level_Element_OneArgs = {
+  object: Factory_Line_Level_Element_Insert_Input;
+  on_conflict?: Maybe<Factory_Line_Level_Element_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Factory_Line_Level_OneArgs = {
+  object: Factory_Line_Level_Insert_Input;
+  on_conflict?: Maybe<Factory_Line_Level_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Factory_Line_OneArgs = {
+  object: Factory_Line_Insert_Input;
+  on_conflict?: Maybe<Factory_Line_On_Conflict>;
 };
 
 
@@ -578,6 +1793,54 @@ export type Mutation_RootUpdate_Component_By_PkArgs = {
   _inc?: Maybe<Component_Inc_Input>;
   _set?: Maybe<Component_Set_Input>;
   pk_columns: Component_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Factory_LineArgs = {
+  _inc?: Maybe<Factory_Line_Inc_Input>;
+  _set?: Maybe<Factory_Line_Set_Input>;
+  where: Factory_Line_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Factory_Line_By_PkArgs = {
+  _inc?: Maybe<Factory_Line_Inc_Input>;
+  _set?: Maybe<Factory_Line_Set_Input>;
+  pk_columns: Factory_Line_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Factory_Line_LevelArgs = {
+  _inc?: Maybe<Factory_Line_Level_Inc_Input>;
+  _set?: Maybe<Factory_Line_Level_Set_Input>;
+  where: Factory_Line_Level_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Factory_Line_Level_By_PkArgs = {
+  _inc?: Maybe<Factory_Line_Level_Inc_Input>;
+  _set?: Maybe<Factory_Line_Level_Set_Input>;
+  pk_columns: Factory_Line_Level_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Factory_Line_Level_ElementArgs = {
+  _inc?: Maybe<Factory_Line_Level_Element_Inc_Input>;
+  _set?: Maybe<Factory_Line_Level_Element_Set_Input>;
+  where: Factory_Line_Level_Element_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Factory_Line_Level_Element_By_PkArgs = {
+  _inc?: Maybe<Factory_Line_Level_Element_Inc_Input>;
+  _set?: Maybe<Factory_Line_Level_Element_Set_Input>;
+  pk_columns: Factory_Line_Level_Element_Pk_Columns_Input;
 };
 
 
@@ -678,6 +1941,10 @@ export enum Order_By {
 export type Production_Structure = {
   __typename?: 'production_structure';
   energy_consumption: Scalars['numeric'];
+  /** An array relationship */
+  factory_line_level_elements: Array<Factory_Line_Level_Element>;
+  /** An aggregated array relationship */
+  factory_line_level_elements_aggregate: Factory_Line_Level_Element_Aggregate;
   id: Scalars['Int'];
   image_url: Scalars['String'];
   liquid_input: Scalars['Int'];
@@ -690,6 +1957,26 @@ export type Production_Structure = {
   solid_input: Scalars['Int'];
   solid_output: Scalars['Int'];
   subcategory?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "production_structure" */
+export type Production_StructureFactory_Line_Level_ElementsArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+
+/** columns and relationships of "production_structure" */
+export type Production_StructureFactory_Line_Level_Elements_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
 };
 
 
@@ -790,6 +2077,7 @@ export type Production_Structure_Bool_Exp = {
   _not?: Maybe<Production_Structure_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Production_Structure_Bool_Exp>>>;
   energy_consumption?: Maybe<Numeric_Comparison_Exp>;
+  factory_line_level_elements?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   image_url?: Maybe<String_Comparison_Exp>;
   liquid_input?: Maybe<Int_Comparison_Exp>;
@@ -820,6 +2108,7 @@ export type Production_Structure_Inc_Input = {
 /** input type for inserting data into table "production_structure" */
 export type Production_Structure_Insert_Input = {
   energy_consumption?: Maybe<Scalars['numeric']>;
+  factory_line_level_elements?: Maybe<Factory_Line_Level_Element_Arr_Rel_Insert_Input>;
   id?: Maybe<Scalars['Int']>;
   image_url?: Maybe<Scalars['String']>;
   liquid_input?: Maybe<Scalars['Int']>;
@@ -910,6 +2199,7 @@ export type Production_Structure_On_Conflict = {
 /** ordering options when selecting data from "production_structure" */
 export type Production_Structure_Order_By = {
   energy_consumption?: Maybe<Order_By>;
+  factory_line_level_elements_aggregate?: Maybe<Factory_Line_Level_Element_Aggregate_Order_By>;
   id?: Maybe<Order_By>;
   image_url?: Maybe<Order_By>;
   liquid_input?: Maybe<Order_By>;
@@ -1139,6 +2429,24 @@ export type Query_Root = {
   component_aggregate: Component_Aggregate;
   /** fetch data from the table: "component" using primary key columns */
   component_by_pk?: Maybe<Component>;
+  /** fetch data from the table: "factory_line" */
+  factory_line: Array<Factory_Line>;
+  /** fetch aggregated fields from the table: "factory_line" */
+  factory_line_aggregate: Factory_Line_Aggregate;
+  /** fetch data from the table: "factory_line" using primary key columns */
+  factory_line_by_pk?: Maybe<Factory_Line>;
+  /** fetch data from the table: "factory_line_level" */
+  factory_line_level: Array<Factory_Line_Level>;
+  /** fetch aggregated fields from the table: "factory_line_level" */
+  factory_line_level_aggregate: Factory_Line_Level_Aggregate;
+  /** fetch data from the table: "factory_line_level" using primary key columns */
+  factory_line_level_by_pk?: Maybe<Factory_Line_Level>;
+  /** fetch data from the table: "factory_line_level_element" */
+  factory_line_level_element: Array<Factory_Line_Level_Element>;
+  /** fetch aggregated fields from the table: "factory_line_level_element" */
+  factory_line_level_element_aggregate: Factory_Line_Level_Element_Aggregate;
+  /** fetch data from the table: "factory_line_level_element" using primary key columns */
+  factory_line_level_element_by_pk?: Maybe<Factory_Line_Level_Element>;
   /** fetch data from the table: "production_structure" */
   production_structure: Array<Production_Structure>;
   /** fetch aggregated fields from the table: "production_structure" */
@@ -1188,6 +2496,84 @@ export type Query_RootComponent_AggregateArgs = {
 
 /** query root */
 export type Query_RootComponent_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** query root */
+export type Query_RootFactory_LineArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Order_By>>;
+  where?: Maybe<Factory_Line_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootFactory_Line_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Order_By>>;
+  where?: Maybe<Factory_Line_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootFactory_Line_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** query root */
+export type Query_RootFactory_Line_LevelArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootFactory_Line_Level_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootFactory_Line_Level_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** query root */
+export type Query_RootFactory_Line_Level_ElementArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootFactory_Line_Level_Element_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootFactory_Line_Level_Element_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -1300,6 +2686,10 @@ export type Query_RootRecipe_Output_By_PkArgs = {
 /** columns and relationships of "recipe" */
 export type Recipe = {
   __typename?: 'recipe';
+  /** An array relationship */
+  factory_line_level_elements: Array<Factory_Line_Level_Element>;
+  /** An aggregated array relationship */
+  factory_line_level_elements_aggregate: Factory_Line_Level_Element_Aggregate;
   id: Scalars['Int'];
   input_slots: Scalars['Int'];
   is_alternative: Scalars['Boolean'];
@@ -1316,6 +2706,26 @@ export type Recipe = {
   recipe_outputs: Array<Recipe_Output>;
   /** An aggregated array relationship */
   recipe_outputs_aggregate: Recipe_Output_Aggregate;
+};
+
+
+/** columns and relationships of "recipe" */
+export type RecipeFactory_Line_Level_ElementsArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+
+/** columns and relationships of "recipe" */
+export type RecipeFactory_Line_Level_Elements_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
 };
 
 
@@ -1431,6 +2841,7 @@ export type Recipe_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Recipe_Bool_Exp>>>;
   _not?: Maybe<Recipe_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Recipe_Bool_Exp>>>;
+  factory_line_level_elements?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   input_slots?: Maybe<Int_Comparison_Exp>;
   is_alternative?: Maybe<Boolean_Comparison_Exp>;
@@ -1460,7 +2871,11 @@ export type Recipe_Inc_Input = {
 export type Recipe_Input = {
   __typename?: 'recipe_input';
   amount: Scalars['numeric'];
+  /** An object relationship */
+  component: Component;
   component_id: Scalars['Int'];
+  /** An object relationship */
+  recipe: Recipe;
   recipe_id: Scalars['Int'];
 };
 
@@ -1536,7 +2951,9 @@ export type Recipe_Input_Bool_Exp = {
   _not?: Maybe<Recipe_Input_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Recipe_Input_Bool_Exp>>>;
   amount?: Maybe<Numeric_Comparison_Exp>;
+  component?: Maybe<Component_Bool_Exp>;
   component_id?: Maybe<Int_Comparison_Exp>;
+  recipe?: Maybe<Recipe_Bool_Exp>;
   recipe_id?: Maybe<Int_Comparison_Exp>;
 };
 
@@ -1556,7 +2973,9 @@ export type Recipe_Input_Inc_Input = {
 /** input type for inserting data into table "recipe_input" */
 export type Recipe_Input_Insert_Input = {
   amount?: Maybe<Scalars['numeric']>;
+  component?: Maybe<Component_Obj_Rel_Insert_Input>;
   component_id?: Maybe<Scalars['Int']>;
+  recipe?: Maybe<Recipe_Obj_Rel_Insert_Input>;
   recipe_id?: Maybe<Scalars['Int']>;
 };
 
@@ -1615,7 +3034,9 @@ export type Recipe_Input_On_Conflict = {
 /** ordering options when selecting data from "recipe_input" */
 export type Recipe_Input_Order_By = {
   amount?: Maybe<Order_By>;
+  component?: Maybe<Component_Order_By>;
   component_id?: Maybe<Order_By>;
+  recipe?: Maybe<Recipe_Order_By>;
   recipe_id?: Maybe<Order_By>;
 };
 
@@ -1759,6 +3180,7 @@ export type Recipe_Input_Variance_Order_By = {
 
 /** input type for inserting data into table "recipe" */
 export type Recipe_Insert_Input = {
+  factory_line_level_elements?: Maybe<Factory_Line_Level_Element_Arr_Rel_Insert_Input>;
   id?: Maybe<Scalars['Int']>;
   input_slots?: Maybe<Scalars['Int']>;
   is_alternative?: Maybe<Scalars['Boolean']>;
@@ -1832,6 +3254,7 @@ export type Recipe_On_Conflict = {
 
 /** ordering options when selecting data from "recipe" */
 export type Recipe_Order_By = {
+  factory_line_level_elements_aggregate?: Maybe<Factory_Line_Level_Element_Aggregate_Order_By>;
   id?: Maybe<Order_By>;
   input_slots?: Maybe<Order_By>;
   is_alternative?: Maybe<Order_By>;
@@ -2348,6 +3771,24 @@ export type Subscription_Root = {
   component_aggregate: Component_Aggregate;
   /** fetch data from the table: "component" using primary key columns */
   component_by_pk?: Maybe<Component>;
+  /** fetch data from the table: "factory_line" */
+  factory_line: Array<Factory_Line>;
+  /** fetch aggregated fields from the table: "factory_line" */
+  factory_line_aggregate: Factory_Line_Aggregate;
+  /** fetch data from the table: "factory_line" using primary key columns */
+  factory_line_by_pk?: Maybe<Factory_Line>;
+  /** fetch data from the table: "factory_line_level" */
+  factory_line_level: Array<Factory_Line_Level>;
+  /** fetch aggregated fields from the table: "factory_line_level" */
+  factory_line_level_aggregate: Factory_Line_Level_Aggregate;
+  /** fetch data from the table: "factory_line_level" using primary key columns */
+  factory_line_level_by_pk?: Maybe<Factory_Line_Level>;
+  /** fetch data from the table: "factory_line_level_element" */
+  factory_line_level_element: Array<Factory_Line_Level_Element>;
+  /** fetch aggregated fields from the table: "factory_line_level_element" */
+  factory_line_level_element_aggregate: Factory_Line_Level_Element_Aggregate;
+  /** fetch data from the table: "factory_line_level_element" using primary key columns */
+  factory_line_level_element_by_pk?: Maybe<Factory_Line_Level_Element>;
   /** fetch data from the table: "production_structure" */
   production_structure: Array<Production_Structure>;
   /** fetch aggregated fields from the table: "production_structure" */
@@ -2397,6 +3838,84 @@ export type Subscription_RootComponent_AggregateArgs = {
 
 /** subscription root */
 export type Subscription_RootComponent_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_LineArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Order_By>>;
+  where?: Maybe<Factory_Line_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_Line_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Order_By>>;
+  where?: Maybe<Factory_Line_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_Line_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_Line_LevelArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_Line_Level_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_Line_Level_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_Line_Level_ElementArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_Line_Level_Element_AggregateArgs = {
+  distinct_on?: Maybe<Array<Factory_Line_Level_Element_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Factory_Line_Level_Element_Order_By>>;
+  where?: Maybe<Factory_Line_Level_Element_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootFactory_Line_Level_Element_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -2543,6 +4062,71 @@ export type GetComponentListQuery = (
   )> }
 );
 
+export type GetFactoryLineListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFactoryLineListQuery = (
+  { __typename?: 'query_root' }
+  & { factory_line: Array<(
+    { __typename?: 'factory_line' }
+    & Pick<Factory_Line, 'id' | 'name'>
+  )> }
+);
+
+export type InsertFactoryLineMutationVariables = Exact<{
+  object: Factory_Line_Insert_Input;
+}>;
+
+
+export type InsertFactoryLineMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_factory_line_one?: Maybe<(
+    { __typename?: 'factory_line' }
+    & Pick<Factory_Line, 'id'>
+  )> }
+);
+
+export type GetFactoryLineByIdSubscriptionVariables = Exact<{
+  id?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetFactoryLineByIdSubscription = (
+  { __typename?: 'subscription_root' }
+  & { factory_line: Array<(
+    { __typename?: 'factory_line' }
+    & Pick<Factory_Line, 'name'>
+    & { factory_line_levels: Array<(
+      { __typename?: 'factory_line_level' }
+      & { factory_line_level_elements: Array<(
+        { __typename?: 'factory_line_level_element' }
+        & { production_structure: (
+          { __typename?: 'production_structure' }
+          & Pick<Production_Structure, 'name' | 'image_url'>
+        ), recipe: (
+          { __typename?: 'recipe' }
+          & Pick<Recipe, 'name'>
+          & { recipe_inputs: Array<(
+            { __typename?: 'recipe_input' }
+            & Pick<Recipe_Input, 'amount'>
+            & { component: (
+              { __typename?: 'component' }
+              & Pick<Component, 'name'>
+            ) }
+          )>, recipe_outputs: Array<(
+            { __typename?: 'recipe_output' }
+            & Pick<Recipe_Output, 'amount'>
+            & { recipe: (
+              { __typename?: 'recipe' }
+              & Pick<Recipe, 'name'>
+            ) }
+          )> }
+        ) }
+      )> }
+    )> }
+  )> }
+);
+
 export type GetProductionListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2572,6 +4156,13 @@ export type GetRecipeListQuery = (
     ), recipe_outputs: Array<(
       { __typename?: 'recipe_output' }
       & Pick<Recipe_Output, 'amount'>
+      & { component: (
+        { __typename?: 'component' }
+        & Pick<Component, 'image_url' | 'name'>
+      ) }
+    )>, recipe_inputs: Array<(
+      { __typename?: 'recipe_input' }
+      & Pick<Recipe_Input, 'amount'>
       & { component: (
         { __typename?: 'component' }
         & Pick<Component, 'image_url' | 'name'>
@@ -2628,6 +4219,75 @@ export const GetComponentListDocument = gql`
     document = GetComponentListDocument;
     
   }
+export const GetFactoryLineListDocument = gql`
+    query getFactoryLineList {
+  factory_line {
+    id
+    name
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetFactoryLineListGQL extends Apollo.Query<GetFactoryLineListQuery, GetFactoryLineListQueryVariables> {
+    document = GetFactoryLineListDocument;
+    
+  }
+export const InsertFactoryLineDocument = gql`
+    mutation insertFactoryLine($object: factory_line_insert_input!) {
+  insert_factory_line_one(object: $object) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class InsertFactoryLineGQL extends Apollo.Mutation<InsertFactoryLineMutation, InsertFactoryLineMutationVariables> {
+    document = InsertFactoryLineDocument;
+    
+  }
+export const GetFactoryLineByIdDocument = gql`
+    subscription getFactoryLineById($id: Int) {
+  factory_line(where: {id: {_eq: $id}}) {
+    name
+    factory_line_levels {
+      factory_line_level_elements {
+        production_structure {
+          name
+          image_url
+        }
+        recipe {
+          name
+          recipe_inputs {
+            amount
+            component {
+              name
+            }
+          }
+          recipe_outputs {
+            amount
+            recipe {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetFactoryLineByIdGQL extends Apollo.Subscription<GetFactoryLineByIdSubscription, GetFactoryLineByIdSubscriptionVariables> {
+    document = GetFactoryLineByIdDocument;
+    
+  }
 export const GetProductionListDocument = gql`
     query getProductionList {
   production_structure(order_by: {name: asc}) {
@@ -2663,6 +4323,13 @@ export const GetRecipeListDocument = gql`
       name
     }
     recipe_outputs {
+      amount
+      component {
+        image_url
+        name
+      }
+    }
+    recipe_inputs {
       amount
       component {
         image_url
