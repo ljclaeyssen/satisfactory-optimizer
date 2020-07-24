@@ -12,3 +12,5 @@ docker-compose up -d
 ```
 
 a database dump is available at the project root `data-backup.sql` to have some datas to enjoy the app
+
+to update generated code, you can go to front file and type `npm run graphql-codegen -- --watch`
