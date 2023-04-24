@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/NotUltiko/satisfactory-optimizer#readme",
   "devDependencies": {
-    "husky": "^4.2.5"
+    "husky": "^8.0.3"
   }
 }
